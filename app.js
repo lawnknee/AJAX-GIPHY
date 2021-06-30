@@ -1,10 +1,12 @@
 "use strict";
+
 let userInput;
 const API_KEY = "ePFJzVv31YN2Pe8nhzaBJeJ6GqfNOYZb";
 
-$("form").on("submit", getSearch);
+$("form").on("submit", getSearchAndAppend);
 
-async function getSearch(e) {
+/*  */
+async function getSearchAndAppend(e) { // think of a better name for this function
   e.preventDefault();
 
   userInput = $("input").val();
@@ -18,9 +20,7 @@ async function getGiphy() {
     `http://api.giphy.com/v1/gifs/search?q=${userInput}&api_key=${API_KEY}`
     // { headers: { accept: "application/json" } }
   );
-  console.log(res)
   let imgURL = res.data.data[0].images.original.url;
-  console.log(imgURL);
   return imgURL;
 }
 
@@ -29,7 +29,9 @@ function appendToDOM(imgURL) {
   $("#img-container").append(newImg);
 }
 
-$('#remove').on("click", function(e){
+$('#remove').on("click", function(e) {
   e.preventDefault();
   $("#img-container").empty();
-})
+});
+
+// doc strings for all the functions
